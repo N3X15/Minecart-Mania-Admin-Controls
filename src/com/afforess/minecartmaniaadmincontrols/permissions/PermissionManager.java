@@ -39,7 +39,7 @@ public class PermissionManager {
 			return true;
 		}
 		if (isHasPermissions()) {
-			return this.handler.permission(player, "minecartmania.signs.create." + sign);
+			return this.handler.has(player, "minecartmania.signs.create." + sign);
 		}
 		return true;
 	}
@@ -49,7 +49,7 @@ public class PermissionManager {
 			return true;
 		}
 		if (isHasPermissions()) {
-			return this.handler.permission(player, "minecartmania.signs.break." + sign);
+			return this.handler.has(player, "minecartmania.signs.break." + sign);
 		}
 		return true;
 	}
@@ -59,7 +59,7 @@ public class PermissionManager {
 			return true;
 		}
 		if (isHasPermissions()) {
-			return this.handler.permission(player, "minecartmania.commands." + command.toLowerCase());
+			return this.handler.has(player, "minecartmania.commands." + command.toLowerCase());
 		}
 		return false;
 	}
@@ -69,7 +69,7 @@ public class PermissionManager {
 			return true;
 		}
 		if (isHasPermissions()) {
-			return this.handler.permission(player, "minecartmania.commands." + command.toLowerCase());
+			return this.handler.has(player, "minecartmania.commands." + command.toLowerCase());
 		}
 		return true;
 	}
