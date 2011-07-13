@@ -42,7 +42,7 @@
         <dependency>
             <groupId>com.afforess</groupId>
             <artifactId>minecartmaniacore</artifactId>
-            <version>1.2.8</version>
+            <version>dev-SNAPSHOT</version>
         </dependency>
 
         <!-- Bukkit -->
