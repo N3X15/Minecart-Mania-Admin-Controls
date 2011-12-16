@@ -6,6 +6,7 @@ import org.bukkit.event.player.PlayerListener;
 
 import com.afforess.minecartmaniacore.world.Item;
 import com.afforess.minecartmaniacore.world.MinecartManiaWorld;
+import com.afforess.minecartmaniacore.world.SpecificMaterial;
 
 public class AdminControlsPlayerListener extends PlayerListener{
 	
@@ -16,22 +17,21 @@ public class AdminControlsPlayerListener extends PlayerListener{
 		if (event.getAction() != Action.RIGHT_CLICK_BLOCK) {
 			return;
 		}
-		if ((Item)MinecartManiaWorld.getConfigurationValue("MinecartTrackAdjuster") == null) {
+		if (MinecartManiaWorld.getConfigurationValue("MinecartTrackAdjuster") == null) {
 			return;
 		}
 		if (event.getItem() == null) {
 			return;
 		}
-		int id = event.getItem().getTypeId();
-		int data = Item.getItem(id).size() == 1 ? 0 : event.getItem().getDurability();
-		Item holding = Item.getItem(id, data);
-		if (holding == null) {
+		Material type = event.getItem().getType();
+		if (type == null) {
 			return;
 		}
-		if (holding.equals((Item)MinecartManiaWorld.getConfigurationValue("MinecartTrackAdjuster"))) {
+		SpecificMaterial mat = (SpecificMaterial) MinecartManiaWorld.getConfigurationValue("MinecartTrackAdjuster");
+		if (type.getId()==mat.getId()) {
 			if (event.getClickedBlock() != null && event.getClickedBlock().getTypeId() == Material.RAILS.getId()) {
 				int oldData = event.getClickedBlock().getData();
-				data = oldData + 1;
+				int data = oldData + 1;
 				if (data > 9) data = 0;
 				MinecartManiaWorld.setBlockData(event.getPlayer().getWorld(), event.getClickedBlock().getX(), event.getClickedBlock().getY(), event.getClickedBlock().getZ(), data);
 				event.setCancelled(true);
