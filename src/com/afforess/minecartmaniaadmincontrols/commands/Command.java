@@ -9,7 +9,6 @@ public interface Command extends CommandExecutor{
 	public boolean isPlayerOnly();
 	public boolean isValidCommand(String label, String[] args);
 	public CommandType getCommand();
-	@Override
 	public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args);
 	
 

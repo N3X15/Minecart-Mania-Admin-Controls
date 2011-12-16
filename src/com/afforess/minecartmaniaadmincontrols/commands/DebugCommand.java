@@ -9,17 +9,14 @@ import com.afforess.minecartmaniacore.debug.DebugMode;
 
 public class DebugCommand extends MinecartManiaCommand{
 
-	@Override
 	public boolean isPlayerOnly() {
 		return false;
 	}
 
-	@Override
 	public CommandType getCommand() {
 		return CommandType.Debug;
 	}
 
-	@Override
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
 		if (args.length == 1) {
 			DebugMode mode = null;

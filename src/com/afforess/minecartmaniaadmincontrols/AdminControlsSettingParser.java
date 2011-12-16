@@ -43,7 +43,6 @@ public class AdminControlsSettingParser implements SettingParser{
 		}
 	}
 
-	@Override
 	public boolean read(Document document) {
 		//Set the default configuration before we try to read anything.
 		setDefaultConfiguration();
@@ -73,7 +72,7 @@ public class AdminControlsSettingParser implements SettingParser{
 							MinecartManiaWorld.getConfiguration().put(elementChildName, MinecartManiaConfigurationParser.toInt(elementChildValue, getDefaultConfigurationIntegerValue(elementChildName)));
 							log.debug("Admin Controls Config read: " + elementChildName + " = " + elementChildValue);
 						} else if (elementChildName == "MinecartTrackAdjuster") {
-							MinecartManiaWorld.getConfiguration().put(elementChildName, MinecartManiaConfigurationParser.toItem(elementChildValue));
+							MinecartManiaWorld.getConfiguration().put(elementChildName, MinecartManiaConfigurationParser.toSpecificMaterial(elementChildValue));
 							log.debug("Admin Controls Config read: " + elementChildName + " = " + elementChildValue);
 						} else {
 							log.info("Admin Controls Config read unknown node: " + elementChildName);
@@ -92,7 +91,7 @@ public class AdminControlsSettingParser implements SettingParser{
 		MinecartManiaWorld.getConfiguration().put("EmptyMinecartKillTimer",			getDefaultConfigurationIntegerValue("EmptyMinecartKillTimer"));
 		MinecartManiaWorld.getConfiguration().put("EmptyStorageMinecartKillTimer",	getDefaultConfigurationIntegerValue("EmptyStorageMinecartKillTimer"));
 		MinecartManiaWorld.getConfiguration().put("EmptyPoweredMinecartKillTimer",	getDefaultConfigurationIntegerValue("EmptyPoweredMinecartKillTimer"));
-		MinecartManiaWorld.getConfiguration().put("MinecartTrackAdjuster",			MinecartManiaConfigurationParser.toItem("66"));
+		MinecartManiaWorld.getConfiguration().put("MinecartTrackAdjuster",			MinecartManiaConfigurationParser.toSpecificMaterial("66"));
 	}
 	private int getDefaultConfigurationIntegerValue(String ConfigName) {
 		if (ConfigName == "EmptyMinecartKillTimer") return (-1);
@@ -116,7 +115,6 @@ public class AdminControlsSettingParser implements SettingParser{
 		}
 	}
 
-	@Override
 	public boolean write(File configuration, Document document) {
 		try {
 			if (document == null) {

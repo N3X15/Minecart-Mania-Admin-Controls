@@ -20,56 +20,52 @@ import com.afforess.minecartmaniacore.config.LocaleParser;
 import com.afforess.minecartmaniacore.minecart.MinecartManiaMinecart;
 import com.afforess.minecartmaniacore.world.MinecartManiaWorld;
 
-public class RedrawMinecartCommand extends MinecartManiaCommand{
-
-	@Override
-	public boolean isPlayerOnly() {
-		return false;
-	}
-
-	@Override
-	public CommandType getCommand() {
-		return CommandType.Hide;
-	}
-
-	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		Player[] online = Bukkit.getServer().getOnlinePlayers();
-		ArrayList<MinecartManiaMinecart> minecarts = MinecartManiaWorld.getMinecartManiaMinecartList();
-		for (Player p : online) {
-			CraftPlayer player = (CraftPlayer)p;
-			for (final MinecartManiaMinecart minecart : minecarts) {
-				final Entity passenger = minecart.minecart.getPassenger();
-				minecart.minecart.eject();
-				Packet packet = new Packet29DestroyEntity(minecart.minecart.getEntityId());
-				player.getHandle().netServerHandler.sendPacket(packet);
-				packet = null;
-				final Vector motion = minecart.minecart.getVelocity();
-				minecart.stopCart();
-				if (minecart.isStandardMinecart()) {
-					packet = new Packet23VehicleSpawn(((CraftMinecart)minecart.minecart).getHandle(), 10);
-				}
-				else if (minecart.isPoweredMinecart()) {
-					packet = new Packet23VehicleSpawn(((CraftMinecart)minecart.minecart).getHandle(), 12);
-				}
-				else if (minecart.isStorageMinecart()) {
-					packet = new Packet23VehicleSpawn(((CraftMinecart)minecart.minecart).getHandle(), 11);
-				}
-				player.getHandle().netServerHandler.sendPacket(packet);
-				if (passenger != null) {
-					Runnable update = new Runnable() {
-						public void run() {
-							minecart.minecart.setVelocity(motion);
-							minecart.minecart.setPassenger(passenger);
-						}
-					};
-					Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MinecartManiaCore.getInstance(), update);
-					
-				}
-			}
-		}
-		sender.sendMessage(LocaleParser.getTextKey("AdminControlsRedrawMinecarts"));
-		return true;
-	}
-
+public class RedrawMinecartCommand extends MinecartManiaCommand {
+    
+    public boolean isPlayerOnly() {
+        return false;
+    }
+    
+    public CommandType getCommand() {
+        return CommandType.Hide;
+    }
+    
+    public boolean onCommand(CommandSender sender, Command command,
+            String label, String[] args) {
+        Player[] online = Bukkit.getServer().getOnlinePlayers();
+        ArrayList<MinecartManiaMinecart> minecarts = MinecartManiaWorld.getMinecartManiaMinecartList();
+        for (Player p : online) {
+            CraftPlayer player = (CraftPlayer) p;
+            for (final MinecartManiaMinecart minecart : minecarts) {
+                final Entity passenger = minecart.minecart.getPassenger();
+                minecart.minecart.eject();
+                Packet packet = new Packet29DestroyEntity(minecart.minecart.getEntityId());
+                player.getHandle().netServerHandler.sendPacket(packet);
+                packet = null;
+                final Vector motion = minecart.minecart.getVelocity();
+                minecart.stopCart();
+                if (minecart.isStandardMinecart()) {
+                    packet = new Packet23VehicleSpawn(((CraftMinecart) minecart.minecart).getHandle(), 10);
+                } else if (minecart.isPoweredMinecart()) {
+                    packet = new Packet23VehicleSpawn(((CraftMinecart) minecart.minecart).getHandle(), 12);
+                } else if (minecart.isStorageMinecart()) {
+                    packet = new Packet23VehicleSpawn(((CraftMinecart) minecart.minecart).getHandle(), 11);
+                }
+                player.getHandle().netServerHandler.sendPacket(packet);
+                if (passenger != null) {
+                    Runnable update = new Runnable() {
+                        public void run() {
+                            minecart.minecart.setVelocity(motion);
+                            minecart.minecart.setPassenger(passenger);
+                        }
+                    };
+                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(MinecartManiaCore.getInstance(), update);
+                    
+                }
+            }
+        }
+        sender.sendMessage(LocaleParser.getTextKey("AdminControlsRedrawMinecarts"));
+        return true;
+    }
+    
 }
