@@ -15,8 +15,7 @@ public class MinecartManiaBaseCommand extends MinecartManiaCommand {
         return CommandType.MM;
     }
     
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         @SuppressWarnings("unused")
         int page;
         if (args.length == 0) {
@@ -24,7 +23,7 @@ public class MinecartManiaBaseCommand extends MinecartManiaCommand {
         } else {
             try {
                 page = Integer.valueOf(StringUtils.getNumber(args[0]));
-            } catch (NumberFormatException e) {
+            } catch (final NumberFormatException e) {
                 page = 1;
             }
         }

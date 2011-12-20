@@ -19,11 +19,10 @@ public class MomentumCommand extends MinecartManiaCommand {
         return CommandType.Momentum;
     }
     
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
-        Player player = (Player) sender;
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+        final Player player = (Player) sender;
         if (player.getVehicle() instanceof Minecart) {
-            MinecartManiaMinecart minecart = MinecartManiaWorld.getMinecartManiaMinecart((Minecart) player.getVehicle());
+            final MinecartManiaMinecart minecart = MinecartManiaWorld.getMinecartManiaMinecart((Minecart) player.getVehicle());
             player.sendMessage(LocaleParser.getTextKey("AdminControlsMomentum", (float) minecart.getMotionX(), (float) minecart.getMotionY(), (float) minecart.getMotionZ()));
         } else {
             player.sendMessage(LocaleParser.getTextKey("AdminControlsMomentumInvalid"));

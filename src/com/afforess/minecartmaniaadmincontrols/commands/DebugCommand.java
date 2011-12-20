@@ -7,41 +7,39 @@ import com.afforess.minecartmaniacore.MinecartManiaCore;
 import com.afforess.minecartmaniacore.config.LocaleParser;
 import com.afforess.minecartmaniacore.debug.DebugMode;
 
-public class DebugCommand extends MinecartManiaCommand{
-
-	public boolean isPlayerOnly() {
-		return false;
-	}
-
-	public CommandType getCommand() {
-		return CommandType.Debug;
-	}
-
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
-		if (args.length == 1) {
-			DebugMode mode = null;
-			for (DebugMode m : DebugMode.values()) {
-				if (args[0].equalsIgnoreCase(m.name())) {
-					mode = m;
-					break;
-				}
-			}
-			if (mode != null) {
-				MinecartManiaCore.log.switchDebugMode(mode);
-				sender.sendMessage(LocaleParser.getTextKey("AdminControlsDebugMode", mode.name()));
-				
-			}
-		}
-		else {
-			String modes = "";
-			for (DebugMode m : DebugMode.values()) {
-				modes += m.name().toLowerCase() + ", ";
-			}
-			modes.substring(0, modes.length() - 3);
-			sender.sendMessage(LocaleParser.getTextKey("AdminControlsValidDebugModes", modes));
-		}
-		return true;
-	}
-
-
+public class DebugCommand extends MinecartManiaCommand {
+    
+    public boolean isPlayerOnly() {
+        return false;
+    }
+    
+    public CommandType getCommand() {
+        return CommandType.Debug;
+    }
+    
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+        if (args.length == 1) {
+            DebugMode mode = null;
+            for (final DebugMode m : DebugMode.values()) {
+                if (args[0].equalsIgnoreCase(m.name())) {
+                    mode = m;
+                    break;
+                }
+            }
+            if (mode != null) {
+                MinecartManiaCore.log.switchDebugMode(mode);
+                sender.sendMessage(LocaleParser.getTextKey("AdminControlsDebugMode", mode.name()));
+                
+            }
+        } else {
+            String modes = "";
+            for (final DebugMode m : DebugMode.values()) {
+                modes += m.name().toLowerCase() + ", ";
+            }
+            modes.substring(0, modes.length() - 3);
+            sender.sendMessage(LocaleParser.getTextKey("AdminControlsValidDebugModes", modes));
+        }
+        return true;
+    }
+    
 }

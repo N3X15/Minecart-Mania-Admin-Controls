@@ -3,9 +3,9 @@ package com.afforess.minecartmaniaadmincontrols.permissions;
 import org.bukkit.Location;
 
 public class SignTextUpdater implements Runnable {
-    private Location sign;
+    private final Location sign;
     
-    public SignTextUpdater(Location location) {
+    public SignTextUpdater(final Location location) {
         sign = location;
     }
     

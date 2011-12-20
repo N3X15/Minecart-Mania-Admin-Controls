@@ -12,8 +12,7 @@ import com.afforess.minecartmaniacore.minecart.MinecartManiaMinecart;
 import com.afforess.minecartmaniacore.utils.StringUtils;
 import com.afforess.minecartmaniacore.world.MinecartManiaWorld;
 
-public class ClearAllCartsCommand extends MinecartManiaCommand implements
-        ClearMinecartCommand {
+public class ClearAllCartsCommand extends MinecartManiaCommand implements ClearMinecartCommand {
     
     public boolean isPlayerOnly() {
         return false;
@@ -23,15 +22,14 @@ public class ClearAllCartsCommand extends MinecartManiaCommand implements
         return CommandType.ClearAllCarts;
     }
     
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         int distance = -1;
         boolean delete = false;
         if (args.length > 0) {
-            for (String arg : args) {
+            for (final String arg : args) {
                 try {
                     distance = Integer.parseInt(StringUtils.getNumber(args[0]));
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     delete = delete || arg.contains("-d");
                 }
             }
@@ -46,10 +44,10 @@ public class ClearAllCartsCommand extends MinecartManiaCommand implements
         MinecartManiaWorld.pruneMinecarts();
         
         int count = 0;
-        ArrayList<MinecartManiaMinecart> minecartList = MinecartManiaWorld.getMinecartManiaMinecartList();
-        for (MinecartManiaMinecart minecart : minecartList) {
+        final ArrayList<MinecartManiaMinecart> minecartList = MinecartManiaWorld.getMinecartManiaMinecartList();
+        for (final MinecartManiaMinecart minecart : minecartList) {
             if (!minecart.isDead() && !minecart.minecart.isDead()) {
-                if (distance < 0 || (minecart.minecart.getLocation().toVector().distance(location) < distance)) {
+                if ((distance < 0) || (minecart.minecart.getLocation().toVector().distance(location) < distance)) {
                     if (shouldRemoveMinecart(minecart)) {
                         count++;
                         minecart.kill(!delete);
@@ -61,7 +59,7 @@ public class ClearAllCartsCommand extends MinecartManiaCommand implements
         return true;
     }
     
-    public boolean shouldRemoveMinecart(MinecartManiaMinecart minecart) {
+    public boolean shouldRemoveMinecart(final MinecartManiaMinecart minecart) {
         return true;
     }
     

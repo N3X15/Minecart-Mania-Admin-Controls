@@ -18,14 +18,12 @@ public class StationCommand extends MinecartManiaCommand {
         return CommandType.St;
     }
     
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
-        Player player = (Player) sender;
-        if (args.length < 1) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+        final Player player = (Player) sender;
+        if (args.length < 1)
             return false;
-        }
-        MinecartManiaPlayer mmp = MinecartManiaWorld.getMinecartManiaPlayer(player);
-        String station = args[0];
+        final MinecartManiaPlayer mmp = MinecartManiaWorld.getMinecartManiaPlayer(player);
+        final String station = args[0];
         mmp.setLastStation(station);
         if (args.length > 1) {
             if (args[1].contains("s")) {

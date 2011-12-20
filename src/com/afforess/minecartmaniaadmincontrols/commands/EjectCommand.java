@@ -24,14 +24,14 @@ public class EjectCommand extends MinecartManiaCommand {
         return false;
     }
     
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (args.length == 1) {
-            List<Player> matchingPlayers = MinecartManiaAdminControls.server.matchPlayer(args[0]);
+            final List<Player> matchingPlayers = MinecartManiaAdminControls.server.matchPlayer(args[0]);
             if (!matchingPlayers.isEmpty()) {
-                for (Player p : matchingPlayers) {
-                    if (p.isInsideVehicle())
+                for (final Player p : matchingPlayers) {
+                    if (p.isInsideVehicle()) {
                         p.leaveVehicle();
+                    }
                     if (isPermenantEject()) {
                         VehicleControl.toggleBlockFromEntering(p);
                     }

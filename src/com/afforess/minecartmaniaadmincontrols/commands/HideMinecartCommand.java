@@ -25,14 +25,13 @@ public class HideMinecartCommand extends MinecartManiaCommand {
         return CommandType.Hide;
     }
     
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
-        Player[] online = Bukkit.getServer().getOnlinePlayers();
-        ArrayList<MinecartManiaMinecart> minecarts = MinecartManiaWorld.getMinecartManiaMinecartList();
-        for (Player p : online) {
-            CraftPlayer player = (CraftPlayer) p;
-            for (MinecartManiaMinecart minecart : minecarts) {
-                Packet packet = new Packet29DestroyEntity(minecart.minecart.getEntityId());
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+        final Player[] online = Bukkit.getServer().getOnlinePlayers();
+        final ArrayList<MinecartManiaMinecart> minecarts = MinecartManiaWorld.getMinecartManiaMinecartList();
+        for (final Player p : online) {
+            final CraftPlayer player = (CraftPlayer) p;
+            for (final MinecartManiaMinecart minecart : minecarts) {
+                final Packet packet = new Packet29DestroyEntity(minecart.minecart.getEntityId());
                 player.getHandle().netServerHandler.sendPacket(packet);
             }
         }

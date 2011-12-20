@@ -21,9 +21,8 @@ public class ListConfigurationKeysCommand extends MinecartManiaCommand {
         return CommandType.ListConfigKeys;
     }
     
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
-        ConcurrentHashMap<String, Object> configKeys = MinecartManiaWorld.getConfiguration();
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+        final ConcurrentHashMap<String, Object> configKeys = MinecartManiaWorld.getConfiguration();
         
         int page;
         if (args.length == 0) {
@@ -31,22 +30,22 @@ public class ListConfigurationKeysCommand extends MinecartManiaCommand {
         } else {
             try {
                 page = Integer.valueOf(StringUtils.getNumber(args[0]));
-            } catch (NumberFormatException e) {
+            } catch (final NumberFormatException e) {
                 sender.sendMessage(LocaleParser.getTextKey("AdminControlsListConfigKeyError"));
                 return true;
             }
         }
         
         int curLine = 0;
-        int maxPages = (int) Math.ceil(((double) configKeys.size() / 6));
+        final int maxPages = (int) Math.ceil(((double) configKeys.size() / 6));
         
         if (page <= maxPages) {
             sender.sendMessage(LocaleParser.getTextKey("AdminControlsListConfigKeyPageHeader", page, maxPages));
             
-            Iterator<Entry<String, Object>> i = configKeys.entrySet().iterator();
+            final Iterator<Entry<String, Object>> i = configKeys.entrySet().iterator();
             while (i.hasNext()) {
-                Entry<String, Object> e = i.next();
-                if (curLine / 6 == (page - 1)) {
+                final Entry<String, Object> e = i.next();
+                if ((curLine / 6) == (page - 1)) {
                     sender.sendMessage(LocaleParser.getTextKey("AdminControlsListConfigKey", e.getKey(), e.getValue()));
                 }
                 curLine++;

@@ -20,28 +20,28 @@ public class ThrottleCommand extends MinecartManiaCommand {
         return CommandType.Throttle;
     }
     
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (args.length != 1) {
             sender.sendMessage(LocaleParser.getTextKey("AdminControlsThrottleUsage"));
             return true;
         }
-        Player player = (Player) sender;
-        if (player.getVehicle() != null && player.getVehicle() instanceof Minecart) {
+        final Player player = (Player) sender;
+        if ((player.getVehicle() != null) && (player.getVehicle() instanceof Minecart)) {
             try {
-                String num = StringUtils.getNumber(args[0]);
-                double throttle = Double.valueOf(num);
+                final String num = StringUtils.getNumber(args[0]);
+                final double throttle = Double.valueOf(num);
                 if (throttle >= 0.0D) {
-                    MinecartManiaMinecart minecart = MinecartManiaWorld.getMinecartManiaMinecart((Minecart) player.getVehicle());
+                    final MinecartManiaMinecart minecart = MinecartManiaWorld.getMinecartManiaMinecart((Minecart) player.getVehicle());
                     minecart.setDataValue("throttle", throttle);
-                    if (throttle <= 100D)
+                    if (throttle <= 100D) {
                         sender.sendMessage(LocaleParser.getTextKey("AdminControlsThrottleSet"));
-                    else
+                    } else {
                         sender.sendMessage(LocaleParser.getTextKey("AdminControlsThrottleSetOverdrive"));
+                    }
                 } else {
                     sender.sendMessage(LocaleParser.getTextKey("AdminControlsThrottleUsage"));
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 sender.sendMessage(LocaleParser.getTextKey("AdminControlsThrottleUsage"));
             }
             return true;

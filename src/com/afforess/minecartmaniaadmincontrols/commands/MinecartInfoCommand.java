@@ -15,15 +15,14 @@ import com.afforess.minecartmaniacore.world.MinecartManiaWorld;
 
 public class MinecartInfoCommand extends MinecartManiaCommand {
     
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         MinecartManiaWorld.pruneMinecarts();
-        ArrayList<MinecartManiaMinecart> minecarts = MinecartManiaWorld.getMinecartManiaMinecartList();
-        int total = minecarts.size();
+        final ArrayList<MinecartManiaMinecart> minecarts = MinecartManiaWorld.getMinecartManiaMinecartList();
+        final int total = minecarts.size();
         int empty, passenger, powered, storage, moving, unmoving;
         empty = passenger = powered = storage = moving = unmoving = 0;
-        HashMap<String, Integer> owners = new HashMap<String, Integer>();
-        for (MinecartManiaMinecart minecart : minecarts) {
+        final HashMap<String, Integer> owners = new HashMap<String, Integer>();
+        for (final MinecartManiaMinecart minecart : minecarts) {
             if (minecart.isStandardMinecart()) {
                 if (minecart.hasPlayerPassenger()) {
                     passenger++;
@@ -41,7 +40,7 @@ public class MinecartInfoCommand extends MinecartManiaCommand {
                 unmoving++;
             }
             if (minecart.getOwner() instanceof Player) {
-                String name = ((Player) minecart.getOwner()).getName();
+                final String name = ((Player) minecart.getOwner()).getName();
                 if (owners.containsKey(name)) {
                     owners.put(name, owners.get(name) + 1);
                 } else {
@@ -52,10 +51,10 @@ public class MinecartInfoCommand extends MinecartManiaCommand {
         
         String most = null;
         int mostCarts = 0;
-        Iterator<Entry<String, Integer>> i = owners.entrySet().iterator();
+        final Iterator<Entry<String, Integer>> i = owners.entrySet().iterator();
         while (i.hasNext()) {
-            Entry<String, Integer> e = i.next();
-            if (most == null || e.getValue() > mostCarts) {
+            final Entry<String, Integer> e = i.next();
+            if ((most == null) || (e.getValue() > mostCarts)) {
                 most = e.getKey();
                 mostCarts = e.getValue();
             }

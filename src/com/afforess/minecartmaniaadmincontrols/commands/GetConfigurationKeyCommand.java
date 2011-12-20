@@ -16,14 +16,13 @@ public class GetConfigurationKeyCommand extends MinecartManiaCommand {
         return CommandType.GetConfigKey;
     }
     
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (args.length != 1) {
             sender.sendMessage(LocaleParser.getTextKey("AdminControlsConfigKeyUsage"));
             return true;
         }
-        String key = args[0];
-        Object value = MinecartManiaWorld.getConfigurationValue(key);
+        final String key = args[0];
+        final Object value = MinecartManiaWorld.getConfigurationValue(key);
         sender.sendMessage(LocaleParser.getTextKey("AdminControlsConfigKey", key, value));
         return true;
     }

@@ -17,13 +17,12 @@ public class SetConfigurationKeyCommand extends MinecartManiaCommand {
         return CommandType.SetConfigKey;
     }
     
-    public boolean onCommand(CommandSender sender, Command command,
-            String label, String[] args) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         if (args.length != 2) {
             sender.sendMessage(LocaleParser.getTextKey("AdminControlsSetConfigKeyUsage"));
             return true;
         }
-        String key = args[0];
+        final String key = args[0];
         String value = args[1];
         if (value.equalsIgnoreCase("null")) {
             MinecartManiaWorld.setConfigurationValue(key, null);
@@ -42,7 +41,7 @@ public class SetConfigurationKeyCommand extends MinecartManiaCommand {
             } else {
                 try {
                     value = StringUtils.getNumber(value);
-                    Double d = Double.valueOf(value);
+                    final Double d = Double.valueOf(value);
                     if (d.intValue() == d) {
                         //try to save it as an int
                         sender.sendMessage(LocaleParser.getTextKey("AdminControlsSetConfigKey", key, String.valueOf(d.intValue())));
@@ -52,7 +51,7 @@ public class SetConfigurationKeyCommand extends MinecartManiaCommand {
                         sender.sendMessage(LocaleParser.getTextKey("AdminControlsSetConfigKey", key, String.valueOf(d.doubleValue())));
                         MinecartManiaWorld.setConfigurationValue(key, d);
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     sender.sendMessage(LocaleParser.getTextKey("AdminControlsInvalidValue"));
                 }
             }
