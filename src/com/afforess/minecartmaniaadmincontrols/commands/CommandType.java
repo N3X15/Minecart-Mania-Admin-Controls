@@ -25,7 +25,8 @@ public enum CommandType {
     Momentum(false, MomentumCommand.class),
     Redraw(true, RedrawMinecartCommand.class),
     Hide(true, HideMinecartCommand.class),
-    Info(false, MinecartInfoCommand.class);
+    Info(false, MinecartInfoCommand.class),
+    ListActiveCarts(true, ListActiveCartsCommand.class);
     
     private boolean admin = false;
     private Class<? extends Command> command = null;
