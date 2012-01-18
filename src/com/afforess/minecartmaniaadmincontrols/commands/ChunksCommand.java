@@ -15,7 +15,7 @@ public class ChunksCommand extends MinecartManiaCommand {
         return CommandType.Chunks;
     }
     
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         sender.sendMessage("Minecart Mania currently has " + ChunkManager.chunksLoaded() + " chunks loaded.");
         return true;
     }

@@ -19,7 +19,7 @@ public class ListActiveCartsCommand extends MinecartManiaCommand {
     }
     
     // /mm listactivecarts [AutoMine]
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
         String searchFor = "";
         if (args.length > 0) {
             searchFor = args[0];
@@ -35,8 +35,8 @@ public class ListActiveCartsCommand extends MinecartManiaCommand {
         return true;
     }
     
-    private boolean fitsCriteria(MinecartManiaMinecart minecart, String searchFor) {
-        return (searchFor.isEmpty() || minecart.getDataValue(searchFor) != null);
+    private boolean fitsCriteria(final MinecartManiaMinecart minecart, final String searchFor) {
+        return (searchFor.isEmpty() || (minecart.getDataValue(searchFor) != null));
     }
     
 }
