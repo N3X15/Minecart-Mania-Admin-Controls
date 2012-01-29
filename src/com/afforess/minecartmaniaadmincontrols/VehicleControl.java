@@ -1,14 +1,10 @@
 package com.afforess.minecartmaniaadmincontrols;
 
-import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
-import org.bukkit.event.vehicle.VehicleEnterEvent;
-import org.bukkit.event.vehicle.VehicleListener;
 
-import com.afforess.minecartmaniacore.config.LocaleParser;
 import com.afforess.minecartmaniacore.world.MinecartManiaWorld;
 
-public class VehicleControl extends VehicleListener {
+public class VehicleControl {
     
     public static void toggleBlockFromEntering(final Player player) {
         if (isBlockedFromEntering(player)) {
@@ -32,19 +28,5 @@ public class VehicleControl extends VehicleListener {
     
     public static int getPoweredMinecartKillTimer() {
         return (Integer) MinecartManiaWorld.getConfigurationValue("EmptyPoweredMinecartKillTimer");
-    }
-    
-    @Override
-    public void onVehicleEnter(final VehicleEnterEvent event) {
-        if (event.isCancelled())
-            return;
-        if (event.getVehicle() instanceof Minecart) {
-            if (event.getEntered() instanceof Player) {
-                if (isBlockedFromEntering((Player) event.getEntered())) {
-                    event.setCancelled(true);
-                    ((Player) event.getEntered()).sendMessage(LocaleParser.getTextKey("AdminControlsBlockMinecartEntry"));
-                }
-            }
-        }
     }
 }

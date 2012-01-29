@@ -4,14 +4,11 @@ import java.util.Arrays;
 
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
-import org.bukkit.event.Event;
-import org.bukkit.event.Event.Priority;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.afforess.minecartmaniaadmincontrols.commands.Command;
 import com.afforess.minecartmaniaadmincontrols.commands.CommandType;
-import com.afforess.minecartmaniaadmincontrols.permissions.PermissionBlockListener;
 import com.afforess.minecartmaniaadmincontrols.permissions.PermissionManager;
 import com.afforess.minecartmaniacore.MinecartManiaCore;
 import com.afforess.minecartmaniacore.config.LocaleParser;
@@ -23,25 +20,24 @@ public class MinecartManiaAdminControls extends JavaPlugin {
     public static MinecartManiaLogger log = MinecartManiaLogger.getInstance();
     public static Server server;
     public static PluginDescriptionFile description;
-    private static final AdminControlsPlayerListener playerListener = new AdminControlsPlayerListener();
-    private static final VehicleControl vehicleListener = new VehicleControl();
-    private static final MinecartTimer timer = new MinecartTimer();
+    private static final AdminControlsListener listener = new AdminControlsListener();
     public static PermissionManager permissions;
-    private static final PermissionBlockListener permissionListener = new PermissionBlockListener();
     
     public void onEnable() {
         server = getServer();
         description = getDescription();
         permissions = new PermissionManager(getServer());
         MinecartManiaConfigurationParser.read(description.getName() + "Configuration.xml", MinecartManiaCore.getDataDirectoryRelativePath(), new AdminControlsSettingParser());
-        getServer().getPluginManager().registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Priority.Normal, this);
-        getServer().getPluginManager().registerEvent(Event.Type.VEHICLE_ENTER, vehicleListener, Priority.Normal, this);
-        getServer().getPluginManager().registerEvent(Event.Type.CUSTOM_EVENT, timer, Priority.Normal, this);
-        getServer().getPluginManager().registerEvent(Event.Type.SIGN_CHANGE, permissionListener, Priority.Normal, this);
-        getServer().getPluginManager().registerEvent(Event.Type.BLOCK_BREAK, permissionListener, Priority.Normal, this);
-        if (permissions.isHasPermissions()) {
-            //getServer().getPluginManager().registerEvent(Event.Type.SIGN_CHANGE, permissionListener, Priority.Normal, this);
-        }
+        getServer().getPluginManager().registerEvents(listener, this);
+        
+        //        getServer().getPluginManager().registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Priority.Normal, this);
+        //        getServer().getPluginManager().registerEvent(Event.Type.VEHICLE_ENTER, vehicleListener, Priority.Normal, this);
+        //        getServer().getPluginManager().registerEvent(Event.Type.CUSTOM_EVENT, timer, Priority.Normal, this);
+        //        getServer().getPluginManager().registerEvent(Event.Type.SIGN_CHANGE, permissionListener, Priority.Normal, this);
+        //        getServer().getPluginManager().registerEvent(Event.Type.BLOCK_BREAK, permissionListener, Priority.Normal, this);
+        //        if (permissions.isHasPermissions()) {
+        //            //getServer().getPluginManager().registerEvent(Event.Type.SIGN_CHANGE, permissionListener, Priority.Normal, this);
+        //        }
         
         log.info(description.getName() + " version " + description.getVersion() + " is enabled!");
     }
