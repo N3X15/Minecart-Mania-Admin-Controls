@@ -17,12 +17,12 @@ public class PermissionManager {
         permissions = server.getPluginManager().getPlugin("Permissions");
         
         if (permissions == null) {
-            MinecartManiaLogger.getInstance().log("Permissions not found. Using OP for admin commands.");
+            MinecartManiaLogger.getInstance().info("Permissions not found. Using OP for admin commands.");
         } else {
             
             try {
                 handler = ((Permissions) permissions).getHandler();
-                MinecartManiaLogger.getInstance().log("Permissions detected. Using permissions.");
+                MinecartManiaLogger.getInstance().info("Permissions detected. Using permissions.");
             } catch (final Exception e) {
                 MinecartManiaLogger.getInstance().severe("Permissions failed to load properly!");
             }
