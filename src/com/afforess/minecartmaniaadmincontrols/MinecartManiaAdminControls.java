@@ -23,6 +23,7 @@ public class MinecartManiaAdminControls extends JavaPlugin {
     private static final AdminControlsListener listener = new AdminControlsListener();
     public static PermissionManager permissions;
     
+    @Override
     public void onEnable() {
         server = getServer();
         description = getDescription();
@@ -42,6 +43,7 @@ public class MinecartManiaAdminControls extends JavaPlugin {
         log.info(description.getName() + " version " + description.getVersion() + " is enabled!");
     }
     
+    @Override
     public void onDisable() {
         
     }

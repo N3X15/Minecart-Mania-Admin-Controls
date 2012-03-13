@@ -9,6 +9,7 @@ import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
@@ -18,7 +19,6 @@ import org.bukkit.event.vehicle.VehicleEnterEvent;
 import com.afforess.minecartmaniaadmincontrols.permissions.SignTextUpdater;
 import com.afforess.minecartmaniacore.MinecartManiaCore;
 import com.afforess.minecartmaniacore.config.LocaleParser;
-import com.afforess.minecartmaniacore.event.MinecartManiaListener;
 import com.afforess.minecartmaniacore.event.MinecartManiaSignFoundEvent;
 import com.afforess.minecartmaniacore.event.MinecartManiaSignUpdatedEvent;
 import com.afforess.minecartmaniacore.event.MinecartTimeEvent;
@@ -31,7 +31,7 @@ import com.afforess.minecartmaniacore.signs.SignManager;
 import com.afforess.minecartmaniacore.world.MinecartManiaWorld;
 import com.afforess.minecartmaniacore.world.SpecificMaterial;
 
-public class AdminControlsListener extends MinecartManiaListener {
+public class AdminControlsListener implements Listener {
     
     @EventHandler(priority = EventPriority.NORMAL)
     public void onVehicleEnter(final VehicleEnterEvent event) {
@@ -47,7 +47,6 @@ public class AdminControlsListener extends MinecartManiaListener {
         }
     }
     
-    @Override
     @EventHandler(priority = EventPriority.NORMAL)
     public void onMinecartTimeEvent(final MinecartTimeEvent event) {
         final MinecartManiaMinecart minecart = event.getMinecart();
