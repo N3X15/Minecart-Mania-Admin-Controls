@@ -2,6 +2,7 @@ package com.afforess.minecartmaniaadmincontrols;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -120,6 +121,9 @@ public class AdminControlsListener implements Listener {
     public void onSignChange(final SignChangeEvent event) {
         if (event.isCancelled())
             return;
+        
+        Logger.getLogger("Minecraft").info("ONSIGNUPDATE: " + event.getBlock().getState().toString());
+        
         if (!(event.getBlock().getState() instanceof org.bukkit.block.Sign))
             return;
         Sign sign = SignManager.getSignAt(event.getBlock().getLocation(), event.getPlayer());
